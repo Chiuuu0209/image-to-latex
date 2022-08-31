@@ -6,11 +6,11 @@ import image_to_latex.data.utils as utils
 
 
 METADATA = {
-    "im2latex_formulas.norm.lst": "http://lstm.seas.harvard.edu/latex/data/im2latex_formulas.norm.lst",
-    "im2latex_validate_filter.lst": "http://lstm.seas.harvard.edu/latex/data/im2latex_validate_filter.lst",
-    "im2latex_train_filter.lst": "http://lstm.seas.harvard.edu/latex/data/im2latex_train_filter.lst",
-    "im2latex_test_filter.lst": "http://lstm.seas.harvard.edu/latex/data/im2latex_test_filter.lst",
-    "formula_images.tar.gz": "http://lstm.seas.harvard.edu/latex/data/formula_images.tar.gz",
+    "im2latex_formulas.norm.lst": "https://zenodo.org/record/56198/files/im2latex_formulas.lst?download=1",
+    # "im2latex_validate_filter.lst": "https://zenodo.org/record/56198/files/im2latex_validate.lst?download=1",
+    # "im2latex_train_filter.lst": "https://zenodo.org/record/56198/files/im2latex_train.lst?download=1",
+    # "im2latex_test_filter.lst": "https://zenodo.org/record/56198/files/im2latex_test.lst?download=1",
+    "formula_images.tar.gz": "https://zenodo.org/record/56198/files/formula_images.tar.gz?download=1",
 }
 PROJECT_DIRNAME = Path(__file__).resolve().parents[1]
 DATA_DIRNAME = PROJECT_DIRNAME / "data"
@@ -48,7 +48,7 @@ def main():
     cleaned_file = "im2latex_formulas.norm.new.lst"
     if not Path(cleaned_file).is_file():
         print("Cleaning data...")
-        script = Path(__file__).resolve().parent / "find_and_replace.sh"
+        script = Path(__file__).resolve().parents[2]/ "scripts" / "find_and_replace.sh"
         subprocess.call(["sh", f"{str(script)}", "im2latex_formulas.norm.lst", cleaned_file])
 
     # Build vocabulary
