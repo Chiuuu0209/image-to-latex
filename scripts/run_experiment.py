@@ -9,14 +9,16 @@ from pytorch_lightning.loggers.wandb import WandbLogger
 
 from image_to_latex.data import Im2Latex
 from image_to_latex.lit_models import LitResNetTransformer
+import os
+os.environ["HYDRA_FULL_ERROR"] = "1"
 
-
-@hydra.main(config_path="../conf", config_name="config")
+@hydra.main(config_path="../conf", config_name="conf")
 def main(cfg: DictConfig):
     datamodule = Im2Latex(**cfg.data)
     datamodule.setup()
 
     lit_model = LitResNetTransformer(**cfg.lit_model)
+    
 
     callbacks: List[Callback] = []
     if cfg.callbacks.model_checkpoint:

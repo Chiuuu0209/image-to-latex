@@ -5,18 +5,11 @@ from pathlib import Path
 import image_to_latex.data.utils as utils
 
 
-# METADATA = {
-#     "im2latex_formulas.norm.lst": "http://lstm.seas.harvard.edu/latex/data/im2latex_formulas.norm.lst",
-#     "im2latex_validate_filter.lst": "http://lstm.seas.harvard.edu/latex/data/im2latex_validate_filter.lst",
-#     "im2latex_train_filter.lst": "http://lstm.seas.harvard.edu/latex/data/im2latex_train_filter.lst",
-#     "im2latex_test_filter.lst": "http://lstm.seas.harvard.edu/latex/data/im2latex_test_filter.lst",
-#     "formula_images.tar.gz": "http://lstm.seas.harvard.edu/latex/data/formula_images.tar.gz",
-# }
 METADATA = {
-    "im2latex_formulas.norm.lst": "http://lstm.seas.harvard.edu/latex/data/im2latex_formulas.norm.lst",
-    "im2latex_validate_filter.lst": "http://lstm.seas.harvard.edu/latex/data/im2latex_validate_filter.lst",
-    "im2latex_train_filter.lst": "http://lstm.seas.harvard.edu/latex/data/im2latex_train_filter.lst",
-    "im2latex_test_filter.lst": "http://lstm.seas.harvard.edu/latex/data/im2latex_test_filter.lst",
+    "im2latex_formulas.norm.lst": "https://zenodo.org/record/56198/files/im2latex_formulas.lst?download=1",
+    "im2latex_validate_filter.lst": "https://zenodo.org/record/56198/files/im2latex_validate.lst?download=1",
+    "im2latex_train_filter.lst": "https://zenodo.org/record/56198/files/im2latex_train.lst?download=1",
+    "im2latex_test_filter.lst": "https://zenodo.org/record/56198/files/im2latex_test.lst?download=1",
     "formula_images.tar.gz": "https://zenodo.org/record/56198/files/formula_images.tar.gz?download=1",
 }
 

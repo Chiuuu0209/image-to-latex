@@ -71,13 +71,8 @@ class BaseDataset(Dataset):
     def __getitem__(self, idx: int):
         """Returns a sample from the dataset at the given index."""
         image_filename, formula = self.image_filenames[idx], self.formulas[idx]
-        image_filepath = self.root_dir / image_filename
-        if image_filepath.is_file():
-            image = pil_loader(image_filepath, mode="L")
-        else:
-            # Returns a blank image if cannot find the image
-            image = Image.fromarray(np.full((64, 128), 255, dtype=np.uint8))
-            formula = []
+        image_filepath = str(self.root_dir / image_filename) + '.png'
+        image = pil_loader(image_filepath, mode="L")
         if self.transform is not None:
             image = self.transform(image=np.array(image))["image"]
         return image, formula
@@ -200,7 +195,7 @@ class Tokenizer:
 
 def get_all_formulas(filename: Path) -> List[List[str]]:
     """Returns all the formulas in the formula file."""
-    with open(filename) as f:
+    with open(filename, encoding = 'ISO-8859-1') as f:  
         all_formulas = [formula.strip("\n").split() for formula in f.readlines()]
     return all_formulas
 
@@ -213,9 +208,10 @@ def get_split(
     formulas = []
     with open(filename) as f:
         for line in f:
-            img_name, formula_idx = line.strip("\n").split()
-            image_names.append(img_name)
-            formulas.append(all_formulas[int(formula_idx)])
+            formula_idx , img_name, _ = line.strip("\n").split()
+            if len(all_formulas[int(formula_idx)]) < 500:
+                image_names.append(img_name)
+                formulas.append(all_formulas[int(formula_idx)])
     return image_names, formulas
 
 

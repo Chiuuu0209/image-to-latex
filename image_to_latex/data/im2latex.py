@@ -31,10 +31,13 @@ class Im2Latex(LightningDataModule):
         self.batch_size = batch_size
         self.num_workers = num_workers
         self.pin_memory = pin_memory
-
         self.data_dirname = Path(__file__).resolve().parents[2] / "data"
         self.vocab_file = Path(__file__).resolve().parent / "vocab.json"
+        print("Data :" , self.data_dirname)
+        print("vocab : " , self.vocab_file)
+
         formula_file = self.data_dirname / "im2latex_formulas.norm.new.lst"
+        print("formula_file : " , formula_file)
         if not formula_file.is_file():
             raise FileNotFoundError("Did you run scripts/prepare_data.py?")
         self.all_formulas = get_all_formulas(formula_file)
