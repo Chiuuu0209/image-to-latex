@@ -5,13 +5,21 @@ from pathlib import Path
 import image_to_latex.data.utils as utils
 
 
+# METADATA = {
+#     "im2latex_formulas.norm.lst": "http://lstm.seas.harvard.edu/latex/data/im2latex_formulas.norm.lst",
+#     "im2latex_validate_filter.lst": "http://lstm.seas.harvard.edu/latex/data/im2latex_validate_filter.lst",
+#     "im2latex_train_filter.lst": "http://lstm.seas.harvard.edu/latex/data/im2latex_train_filter.lst",
+#     "im2latex_test_filter.lst": "http://lstm.seas.harvard.edu/latex/data/im2latex_test_filter.lst",
+#     "formula_images.tar.gz": "http://lstm.seas.harvard.edu/latex/data/formula_images.tar.gz",
+# }
 METADATA = {
     "im2latex_formulas.norm.lst": "http://lstm.seas.harvard.edu/latex/data/im2latex_formulas.norm.lst",
     "im2latex_validate_filter.lst": "http://lstm.seas.harvard.edu/latex/data/im2latex_validate_filter.lst",
     "im2latex_train_filter.lst": "http://lstm.seas.harvard.edu/latex/data/im2latex_train_filter.lst",
     "im2latex_test_filter.lst": "http://lstm.seas.harvard.edu/latex/data/im2latex_test_filter.lst",
-    "formula_images.tar.gz": "http://lstm.seas.harvard.edu/latex/data/formula_images.tar.gz",
+    "formula_images.tar.gz": "https://zenodo.org/record/56198/files/formula_images.tar.gz?download=1",
 }
+
 PROJECT_DIRNAME = Path(__file__).resolve().parents[1]
 DATA_DIRNAME = PROJECT_DIRNAME / "data"
 RAW_IMAGES_DIRNAME = DATA_DIRNAME / "formula_images"
@@ -48,8 +56,9 @@ def main():
     cleaned_file = "im2latex_formulas.norm.new.lst"
     if not Path(cleaned_file).is_file():
         print("Cleaning data...")
-        script = Path(__file__).resolve().parent / "find_and_replace.sh"
+        script = Path(__file__).resolve().parents[2] / "scripts" / "find_and_replace.sh"
         subprocess.call(["sh", f"{str(script)}", "im2latex_formulas.norm.lst", cleaned_file])
+        print("Done cleaning data.")
 
     # Build vocabulary
     if not VOCAB_FILE.is_file():
@@ -60,6 +69,7 @@ def main():
         tokenizer.train(train_formulas)
         tokenizer.save(VOCAB_FILE)
     os.chdir(cur_dir)
+    print("Done.")
 
 
 if __name__ == "__main__":

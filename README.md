@@ -77,10 +77,13 @@ cd image-to-latex
 ```
 
 Then, create a virtual environment named `venv` and install required packages:
-
 ```
-make venv
-make install-dev
+virtualenv venv --python=3.6
+source venv/bin/activate
+pip install -r requirements.txt
+pip install torchmetrics==0.5
+pip install setuptools==59.5.0
+python -m pip install -e . --no-cache-dir
 ```
 
 ### Data Preprocessing
